@@ -1,0 +1,6 @@
+/d/MyStuff/BonsaiDiffTool/cmake-3.25.0-rc4-tutorial-source/Step2_build/CMakeFiles/rebuild_cache.dir
+/d/MyStuff/BonsaiDiffTool/cmake-3.25.0-rc4-tutorial-source/Step2_build/CMakeFiles/edit_cache.dir
+/d/MyStuff/BonsaiDiffTool/cmake-3.25.0-rc4-tutorial-source/Step2_build/CMakeFiles/Tutorial.dir
+/d/MyStuff/BonsaiDiffTool/cmake-3.25.0-rc4-tutorial-source/Step2_build/MathFunctions/CMakeFiles/edit_cache.dir
+/d/MyStuff/BonsaiDiffTool/cmake-3.25.0-rc4-tutorial-source/Step2_build/MathFunctions/CMakeFiles/rebuild_cache.dir
+/d/MyStuff/BonsaiDiffTool/cmake-3.25.0-rc4-tutorial-source/Step2_build/MathFunctions/CMakeFiles/MathFunction.dir

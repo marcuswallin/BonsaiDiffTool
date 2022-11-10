@@ -1,0 +1,24 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/d/MyStuff/BonsaiDiffTool/cmake-3.25.0-rc4-tutorial-source/Step2/MathFunctions/MathFunctions.h
+
+/d/MyStuff/BonsaiDiffTool/cmake-3.25.0-rc4-tutorial-source/Step2/tutorial.cxx
+cmath
+-
+iostream
+-
+string
+-
+TutorialConfig.h
+/d/MyStuff/BonsaiDiffTool/cmake-3.25.0-rc4-tutorial-source/Step2/TutorialConfig.h
+MathFunctions.h
+/d/MyStuff/BonsaiDiffTool/cmake-3.25.0-rc4-tutorial-source/Step2/MathFunctions.h
+
+TutorialConfig.h
+
