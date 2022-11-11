@@ -3,9 +3,17 @@
 //
 
 #include <iostream>
+#include <string>
+#include <image_insertion.h>
 
-int main()
+int main(int argc, char *argv[])
 {
-    std::cout << "Hello World" << "\n";
+    if(argc != 3)
+    {
+        std::cout << "Need two input arguments" << "\n";
+    }
+    insert_image((std::string) argv[1], (std::string) argv[2], <#initializer#>);
+
     return 1;
 }
+
