@@ -9,9 +9,8 @@
 #include <exception>
 
 class WrongFileTypeException : public std::exception {
-
 };
 
-void insert_image(const std::string &tree_name, const std::string &file_path, const std::string &output_dir);
+bool insert_image(const std::string &tree_name, const std::string &file_path, const std::string &output_dir);
 
 #endif //BONSAIDIFFTOOL_IMAGEIO_H

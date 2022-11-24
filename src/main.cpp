@@ -1,10 +1,8 @@
-//
-// Created by marcus.wallin on 11/10/22.
-//
-
 #include <iostream>
 #include <string>
 #include <image_insertion.h>
+
+#define IMAGE_PATH "/d/MyStuff/bonsai-images"
 
 int main(int argc, char *argv[])
 {
@@ -12,7 +10,7 @@ int main(int argc, char *argv[])
     {
         std::cout << "Need two input arguments" << "\n";
     }
-    insert_image((std::string) argv[1], (std::string) argv[2], <#initializer#>);
+    insert_image((std::string) argv[1], (std::string) argv[2], IMAGE_PATH);
 
     return 1;
 }

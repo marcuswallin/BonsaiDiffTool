@@ -1,3 +1,0 @@
-/d/MyStuff/BonsaiDiffTool/cmake-3.25.0-rc4-tutorial-source/step1_build/CMakeFiles/rebuild_cache.dir
-/d/MyStuff/BonsaiDiffTool/cmake-3.25.0-rc4-tutorial-source/step1_build/CMakeFiles/edit_cache.dir
-/d/MyStuff/BonsaiDiffTool/cmake-3.25.0-rc4-tutorial-source/step1_build/CMakeFiles/Tutorial.dir
