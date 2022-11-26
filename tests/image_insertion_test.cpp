@@ -1,6 +1,7 @@
 #include <gtest/gtest.h>
 #include <image_insertion.h>
 #include <filesystem>
+#include <date/date.h>
 
 using namespace std;
 
@@ -13,6 +14,7 @@ protected:
     const string image2 = "birch2.png";
     std::filesystem::path birch_image1_path = test_files / image1;
     std::filesystem::path birch_image2_path = test_files / image2;
+    date::year_month_day date;
 
     void SetUp() override {
         filesystem::remove_all(actual_files);
