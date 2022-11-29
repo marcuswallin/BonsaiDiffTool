@@ -6,17 +6,10 @@ FetchContent_Declare(
         GIT_TAG        release-1.11.0
 )
 
-FetchContent_Declare(
-        date_src
-        GIT_REPOSITORY https://github.com/HowardHinnant/date.git
-        GIT_TAG        v3.0.1
-        )
-FetchContent_MakeAvailable(date_src)
-
 FetchContent_MakeAvailable(googletest)
 add_library(GTest::GTest INTERFACE IMPORTED)
 
-#add_library(date::date INTERFACE IMPORTED)
+#add_library(date_lib INTERFACE IMPORTED GLOBAL)
 
 add_executable(
         image_insertion_test

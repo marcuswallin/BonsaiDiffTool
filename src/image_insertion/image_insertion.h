@@ -7,12 +7,10 @@
 
 #include <string>
 #include <exception>
+#include <date/date.h>
+
 
 class WrongFileTypeException : public std::exception {
-};
-
-class Date{
-
 };
 
 bool insert_image(const std::string &tree_name, const std::string &file_path, const std::string &output_dir);
