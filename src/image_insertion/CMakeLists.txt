@@ -1,4 +1,4 @@
-add_library(ImageInsertion image_insertion.cpp image_insertion.h)
+add_library(ImageInsertion image_path.cpp image_path.h)
 
 target_link_libraries(
     ImageInsertion

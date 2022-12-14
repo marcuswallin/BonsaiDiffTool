@@ -1,5 +1,5 @@
 #include <gtest/gtest.h>
-#include <image_insertion.h>
+#include <image_path.h>
 #include <filesystem>
 #include <date/date.h>
 
@@ -16,7 +16,7 @@ protected:
     std::filesystem::path birch_image2_path = test_files / image2;
     date::year_month_day date;
 
-    void SetUp() override {
+    ImageInsertionTest() {
         filesystem::remove_all(actual_files);
         filesystem::create_directory(actual_files);
     }
@@ -68,11 +68,12 @@ TEST_F(ImageInsertionTest, test_copy_two_png_files_to_different_folder) {
     verifyFileExists(tree_name2, image2);
 }
 
-TEST_F(ImageInsertionTest, DISABLED_test_copy_same_png_files_to_same_folder) {
+TEST_F(ImageInsertionTest, test_copy_same_png_files_to_same_folder) {
     const string tree_name1 = "birch1";
 
     ASSERT_TRUE(insert_image(tree_name1, birch_image1_path, actual_files));
-    ASSERT_FALSE(insert_image(tree_name1, birch_image1_path, actual_files));
+    ASSERT_THROW(insert_image(tree_name1, birch_image1_path, actual_files), 
+                 filesystem::filesystem_error);
 
     verifyFileExists(tree_name1, image1);
 }
