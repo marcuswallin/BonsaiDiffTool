@@ -1,9 +1,9 @@
 add_subdirectory(image_insertion)
 
-add_executable(main main.cpp)
+add_executable(bonsai main.cpp)
 
 target_link_libraries(
-        main
+        bonsai
         PRIVATE
         ImageInsertion
         date::date
