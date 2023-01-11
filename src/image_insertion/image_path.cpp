@@ -5,7 +5,8 @@
 
 using namespace std;
 
-bool insert_image(const std::string &tree_name, const std::string &file_path, const std::string &output_dir)
+bool insert_image(const string &tree_name, const string &file_path, const string &output_dir,
+                  const string &year, const string &month, const string &day)
 {
     auto input_path = filesystem::path(file_path);
     if (input_path.extension() == ".png" || input_path.extension() == ".jpg")
@@ -19,4 +20,14 @@ bool insert_image(const std::string &tree_name, const std::string &file_path, co
     {
         throw WrongFileTypeException{};
     }
+}
+
+date::year_month_day convert_string_to_date(const string &year, const string &month, const string &day)
+{
+    auto date = date::year_month_day{date::year(stoi(year)), date::month(stoi(month)), date::day(stoi(day))};
+    if (!date.ok())
+    {
+        throw InvalidDateException{};
+    }
+    return date;
 }
