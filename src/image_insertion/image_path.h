@@ -18,8 +18,10 @@ class InvalidDateException : public std::exception
 {
 };
 
-bool insert_image(const std::string &tree_name, const std::string &file_path, const std::string &output_dir,
-                  const std::string &year = "2022", const std::string &month = "01", const std::string &day = "01");
+bool insert_image(const std::string &tree_name,
+                  const std::string &file_path,
+                  const std::string &output_dir,
+                  const date::year_month_day &date);
 
 date::year_month_day convert_string_to_date(const std::string &year, const std::string &month, const std::string &day);
 
