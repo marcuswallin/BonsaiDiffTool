@@ -5,9 +5,44 @@
 
 using namespace std;
 
-string convert_date_to_file_name(const date::year_month_day &date, const string &file_extension)
+string convert_date_to_file_name(const date::year_month_day &date)
 {
-    return "hello";
+    ostringstream os;
+    os << date.year();
+    os.fill('0');
+
+    if (date.month().ok())
+    {
+        os << "-";
+        os.width(2);
+        os << static_cast<unsigned>(date.month());
+
+        if (date.day().ok())
+        {
+            os << "-";
+            os.width(2);
+            os << static_cast<unsigned>(date.day());
+        }
+    }
+    return os.str();
+}
+
+// bool should not be necessary here
+bool copy_file_with_date_as_file_name(const filesystem::path &input_file,
+                                      const filesystem::path &output_directory,
+                                      const date::year_month_day &date,
+                                      const string &file_extension)
+{
+    filesystem::create_directory(output_directory);
+    auto date_filename = convert_date_to_file_name(date);
+    auto output_path = output_directory / (date_filename + file_extension);
+    int count = 1;
+    while (filesystem::exists(output_path))
+    {
+        output_path = output_directory / (date_filename + "_" + to_string(count) + file_extension);
+        ++count;
+    }
+    return filesystem::copy_file(input_file, output_path);
 }
 
 bool insert_image(const std::string &tree_name,
@@ -20,9 +55,7 @@ bool insert_image(const std::string &tree_name,
     if (file_extension == ".png" || file_extension == ".jpg")
     {
         auto tree_dir = filesystem::path(output_dir) / tree_name;
-        filesystem::create_directory(tree_dir);
-        auto output_path = tree_dir / convert_date_to_file_name(date, file_extension);
-        return filesystem::copy_file(input_path, output_path);
+        return copy_file_with_date_as_file_name(input_path, tree_dir, date, file_extension);
     }
     else
     {

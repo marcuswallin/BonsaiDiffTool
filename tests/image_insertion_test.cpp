@@ -36,7 +36,7 @@ protected:
     }
 };
 
-TEST_F(ImageInsertionTest, test_image_that_does_not_exist)
+TEST_F(ImageInsertionTest, image_that_does_not_exist)
 {
     EXPECT_THROW(insert_image("birch1", test_files / "image_that_does_not_exist.png", actual_files, date),
                  filesystem::__cxx11::filesystem_error);
@@ -49,7 +49,7 @@ TEST_F(ImageInsertionTest, test_should_not_copy_text_files)
         WrongFileTypeException);
 }
 
-TEST_F(ImageInsertionTest, test_should_copy_png_files)
+TEST_F(ImageInsertionTest, should_copy_png_files)
 {
     const string tree_name = "birch1";
 
@@ -58,18 +58,18 @@ TEST_F(ImageInsertionTest, test_should_copy_png_files)
     verifyFileExists(tree_name, "2022-10-03.png");
 }
 
-TEST_F(ImageInsertionTest, test_copy_two_png_files_to_same_folder)
+TEST_F(ImageInsertionTest, insert_two_png_files_to_same_folder)
 {
     const string tree_name = "birch1";
 
     EXPECT_TRUE(insert_image(tree_name, birch_image1_path, actual_files, date));
-    EXPECT_TRUE(insert_image(tree_name, birch_image2_path, actual_files, date));
+    EXPECT_TRUE(insert_image(tree_name, birch_image2_path, actual_files, date + date::months(1)));
 
-    verifyFileExists(tree_name, image1);
-    verifyFileExists(tree_name, image2);
+    verifyFileExists(tree_name, "2022-10-03.png");
+    verifyFileExists(tree_name, "2022-11-03.png");
 }
 
-TEST_F(ImageInsertionTest, test_copy_two_png_files_to_different_folder)
+TEST_F(ImageInsertionTest, insert_two_png_files_to_different_folder)
 {
     const string tree_name1 = "birch1";
     const string tree_name2 = "birch2";
@@ -77,19 +77,33 @@ TEST_F(ImageInsertionTest, test_copy_two_png_files_to_different_folder)
     EXPECT_TRUE(insert_image(tree_name1, birch_image1_path, actual_files, date));
     EXPECT_TRUE(insert_image(tree_name2, birch_image2_path, actual_files, date));
 
-    verifyFileExists(tree_name1, image1);
-    verifyFileExists(tree_name2, image2);
+    verifyFileExists(tree_name1, "2022-10-03.png");
+    verifyFileExists(tree_name2, "2022-10-03.png");
 }
 
-TEST_F(ImageInsertionTest, test_copy_same_png_files_to_same_folder)
+TEST_F(ImageInsertionTest, insert_two_files_with_same_date)
 {
     const string tree_name1 = "birch1";
 
     EXPECT_TRUE(insert_image(tree_name1, birch_image1_path, actual_files, date));
-    EXPECT_THROW(insert_image(tree_name1, birch_image1_path, actual_files, date),
-                 filesystem::filesystem_error);
+    EXPECT_TRUE(insert_image(tree_name1, birch_image1_path, actual_files, date));
 
-    verifyFileExists(tree_name1, image1);
+    verifyFileExists(tree_name1, "2022-10-03.png");
+    verifyFileExists(tree_name1, "2022-10-03_1.png");
+}
+
+TEST_F(ImageInsertionTest, insert_three_files_with_same_date_only_year_available)
+{
+    const string tree_name1 = "birch1";
+    date::year_month_day year_date{date::year{2015}, date::month{0}, date::day{0}};
+
+    EXPECT_TRUE(insert_image(tree_name1, birch_image1_path, actual_files, year_date));
+    EXPECT_TRUE(insert_image(tree_name1, birch_image1_path, actual_files, year_date));
+    EXPECT_TRUE(insert_image(tree_name1, birch_image1_path, actual_files, year_date));
+
+    verifyFileExists(tree_name1, "2015.png");
+    verifyFileExists(tree_name1, "2015_1.png");
+    verifyFileExists(tree_name1, "2015_2.png");
 }
 
 TEST(ConvertStringToDateTest, normalInput)
@@ -163,4 +177,39 @@ TEST(ConvertStringToDateTest, noneInputOnYear)
 {
     EXPECT_THROW(convert_string_to_date("None", "11", "23"),
                  InvalidDateException);
+}
+
+TEST(ConvertDateToFileName, validDate)
+{
+    date::year_month_day date{date::year{1999}, date::month{12}, date::day{25}};
+    auto file_name = convert_date_to_file_name(date);
+    EXPECT_EQ(file_name, "1999-12-25");
+}
+
+TEST(ConvertDateToFileName, validDateWithOneIntegerInMOnthAndDay)
+{
+    date::year_month_day date{date::year{2022}, date::month{2}, date::day{8}};
+    auto file_name = convert_date_to_file_name(date);
+    EXPECT_EQ(file_name, "2022-02-08");
+}
+
+TEST(ConvertDateToFileName, unknownDay)
+{
+    date::year_month_day date{date::year{2022}, date::month{4}, date::day{0}};
+    auto file_name = convert_date_to_file_name(date);
+    EXPECT_EQ(file_name, "2022-04");
+}
+
+TEST(ConvertDateToFileName, unknownDayAndMonth)
+{
+    date::year_month_day date{date::year{2022}, date::month{0}, date::day{0}};
+    auto file_name = convert_date_to_file_name(date);
+    EXPECT_EQ(file_name, "2022");
+}
+
+TEST(ConvertDateToFileName, unknownMonthNotDay)
+{
+    date::year_month_day date{date::year{2022}, date::month{0}, date::day{12}};
+    auto file_name = convert_date_to_file_name(date);
+    EXPECT_EQ(file_name, "2022");
 }

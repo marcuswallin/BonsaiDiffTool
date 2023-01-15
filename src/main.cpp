@@ -41,7 +41,7 @@ namespace bonsai
 
         auto tree_name = parsed_options["tree-name"].as<std::string>();
         auto input_image = parsed_options["input"].as<std::string>();
-        insert_image(tree_name, input_image, IMAGE_PATH);
+        insert_image(tree_name, input_image, IMAGE_PATH, date);
     }
 }
 
