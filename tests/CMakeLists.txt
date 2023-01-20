@@ -9,8 +9,6 @@ FetchContent_Declare(
 FetchContent_MakeAvailable(googletest)
 add_library(GTest::GTest INTERFACE IMPORTED)
 
-#add_library(date_lib INTERFACE IMPORTED GLOBAL)
-
 add_executable(
         image_insertion_test
         image_insertion_test.cpp

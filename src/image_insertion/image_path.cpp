@@ -71,38 +71,38 @@ int convert_date_input_to_int(const string &date_input)
     }
     catch (const std::invalid_argument &e)
     {
-        throw InvalidDateException{};
+        throw InvalidDateException{"The input " + date_input + " should be an integer"};
     }
 }
 
-date::year_month_day convert_string_to_date(const string &year, const string &month, const string &day)
+date::year_month_day convert_int_to_date(const int &year, const int &month, const int &day)
 {
-    auto no_input = "None";
-
-    auto day_date = date::day(0);
-    if (day != no_input)
-    {
-        day_date = date::day(convert_date_input_to_int(day));
-        if (!day_date.ok())
-        {
-            throw InvalidDateException{};
-        }
-    }
+    auto no_input = 0;
 
     auto month_date = date::month(0);
     if (month != no_input)
     {
-        month_date = date::month(convert_date_input_to_int(month));
+        month_date = date::month(month);
         if (!month_date.ok())
         {
-            throw InvalidDateException{};
+            throw InvalidDateException{to_string(month) + " is not a valid month. The value should be an integer from 1-12 where 1=January and so on."};
         }
     }
 
-    auto year_date = date::year(convert_date_input_to_int(year));
+    auto day_date = date::day(0);
+    if (day != no_input)
+    {
+        day_date = date::day(day);
+        if (!day_date.ok())
+        {
+            throw InvalidDateException{to_string(day) + " is not a day of month " + to_string(month)};
+        }
+    }
+
+    auto year_date = date::year(year);
     if (!year_date.ok())
     {
-        throw InvalidDateException{};
+        throw InvalidDateException{to_string(year) + " is not a valid year."};
     }
 
     auto date = date::year_month_day{year_date, month_date, day_date};

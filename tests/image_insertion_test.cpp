@@ -108,7 +108,7 @@ TEST_F(ImageInsertionTest, insert_three_files_with_same_date_only_year_available
 
 TEST(ConvertStringToDateTest, normalInput)
 {
-    auto date = convert_string_to_date("2022", "5", "23");
+    auto date = convert_int_to_date(2022, 5, 23);
 
     EXPECT_EQ(date.day(), date::day(23));
     EXPECT_EQ(date.month(), date::month(5));
@@ -117,35 +117,21 @@ TEST(ConvertStringToDateTest, normalInput)
 
 TEST(ConvertStringToDateTest, dateThatDoesNotExist)
 {
-    EXPECT_THROW(convert_string_to_date("2022", "5", "35"),
+    EXPECT_THROW(convert_int_to_date(2022, 5, 35),
                  InvalidDateException);
-    EXPECT_THROW(convert_string_to_date("2000", "0", "5"),
+    EXPECT_THROW(convert_int_to_date(2000, -1, 5),
                  InvalidDateException);
-    EXPECT_THROW(convert_string_to_date("2022", "-5", "20"),
+    EXPECT_THROW(convert_int_to_date(2022, -5, 20),
                  InvalidDateException);
-    EXPECT_THROW(convert_string_to_date("2022", "5", "-10"),
+    EXPECT_THROW(convert_int_to_date(2022, 5, -10),
                  InvalidDateException);
-    EXPECT_THROW(convert_string_to_date("2022", "14", "8"),
-                 InvalidDateException);
-}
-
-TEST(ConvertStringToDateTest, invalidTextInput)
-{
-    EXPECT_THROW(convert_string_to_date("2022", "5", "blabla"),
-                 InvalidDateException);
-    EXPECT_THROW(convert_string_to_date("2022", "5", "bla23"),
-                 InvalidDateException);
-    EXPECT_THROW(convert_string_to_date("laks", "5", "23"),
-                 InvalidDateException);
-    EXPECT_THROW(convert_string_to_date("2022", "iause", "bla23"),
-                 InvalidDateException);
-    EXPECT_THROW(convert_string_to_date("avs", "we", "akwk"),
+    EXPECT_THROW(convert_int_to_date(2022, 14, 8),
                  InvalidDateException);
 }
 
 TEST(ConvertStringToDateTest, noneInputOnDay)
 {
-    auto year_and_month = convert_string_to_date("2022", "5", "None");
+    auto year_and_month = convert_int_to_date(2022, 5, 0);
 
     EXPECT_FALSE(year_and_month.ok());
     EXPECT_EQ(year_and_month.day(), date::day(0));
@@ -155,7 +141,7 @@ TEST(ConvertStringToDateTest, noneInputOnDay)
 
 TEST(ConvertStringToDateTest, noneInputOnMonth)
 {
-    auto year_and_month = convert_string_to_date("1999", "None", "23");
+    auto year_and_month = convert_int_to_date(1999, 0, 23);
 
     EXPECT_FALSE(year_and_month.ok());
     EXPECT_EQ(year_and_month.day(), date::day(23));
@@ -165,18 +151,12 @@ TEST(ConvertStringToDateTest, noneInputOnMonth)
 
 TEST(ConvertStringToDateTest, noneInputOnDayAndMonth)
 {
-    auto year_and_month = convert_string_to_date("1999", "None", "None");
+    auto year_and_month = convert_int_to_date(1999, 0, 0);
 
     EXPECT_FALSE(year_and_month.ok());
     EXPECT_EQ(year_and_month.day(), date::day(0));
     EXPECT_EQ(year_and_month.month(), date::month(0));
     EXPECT_EQ(year_and_month.year(), date::year(1999));
-}
-
-TEST(ConvertStringToDateTest, noneInputOnYear)
-{
-    EXPECT_THROW(convert_string_to_date("None", "11", "23"),
-                 InvalidDateException);
 }
 
 TEST(ConvertDateToFileName, validDate)
