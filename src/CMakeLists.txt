@@ -1,4 +1,5 @@
 add_subdirectory(image_insertion)
+add_subdirectory(image_viewer)
 
 add_executable(bonsai main.cpp)
 

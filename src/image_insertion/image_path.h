@@ -2,8 +2,8 @@
 // Created by marcus.wallin on 11/11/22.
 //
 
-#ifndef BONSAIDIFFTOOL_IMAGEIO_H
-#define BONSAIDIFFTOOL_IMAGEIO_H
+#ifndef BONSAIDIFFTOOL_IMAGEPATH_H
+#define BONSAIDIFFTOOL_IMAGEPATH_H
 
 #include <string>
 #include <exception>
@@ -40,4 +40,4 @@ date::year_month_day convert_int_to_date(const int &year, const int &month, cons
 */
 std::string convert_date_to_file_name(const date::year_month_day &date);
 
-#endif // BONSAIDIFFTOOL_IMAGEIO_H
+#endif // BONSAIDIFFTOOL_IMAGEPATH_H
