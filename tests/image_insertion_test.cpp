@@ -2,19 +2,18 @@
 #include <image_path.h>
 #include <filesystem>
 #include <date/date.h>
+#include <test_path.h> // cmake defined file containing the path to this compiled binary 
 
 using namespace std;
 
 class ImageInsertionTest : public ::testing::Test
 {
 protected:
-    std::filesystem::path current_working_directory = std::filesystem::current_path();
+    std::filesystem::path current_working_directory = TEST_PATH;
     std::filesystem::path test_files = current_working_directory / "test_files";
     std::filesystem::path actual_files = current_working_directory / "actual_files";
-    const string image1 = "birch1.png";
-    const string image2 = "birch2.png";
-    std::filesystem::path birch_image1_path = test_files / image1;
-    std::filesystem::path birch_image2_path = test_files / image2;
+    std::filesystem::path birch_image1_path = test_files / "birch1.png";
+    std::filesystem::path birch_image2_path = test_files / "birch2.png";
 
     date::year_month_day date{date::year(2022), date::month(10), date::day(3)};
 
