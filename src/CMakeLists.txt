@@ -7,6 +7,7 @@ target_link_libraries(
         bonsai
         PRIVATE
         ImageInsertion
+        ImageViewer
         date::date
         cxxopts
 )

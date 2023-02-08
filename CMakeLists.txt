@@ -22,5 +22,12 @@ FetchContent_Declare(
         )
 FetchContent_MakeAvailable(cxxopts)
 
+FetchContent_Declare(
+        opencv
+        GIT_REPOSITORY https://github.com/opencv/opencv.git
+        GIT_TAG        4.7.0
+        )
+FetchContent_MakeAvailable(opencv)
+
 add_subdirectory(tests)
 add_subdirectory(src)

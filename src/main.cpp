@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include <image_path.h>
+#include <image_viewer.h>
 #include <cxxopts.hpp>
 
 #define IMAGE_PATH "/mnt/d/bonsai-images"
@@ -37,6 +38,13 @@ namespace bonsai
         auto input_image = parsed_options["input"].as<std::string>();
         insert_image(tree_name, input_image, IMAGE_PATH, date);
     }
+
+    void run_show(int argc, char *argv[])
+    {
+        std::cout << "Running show command" << "\n";
+    }
+    
+
 }
 
 int main(int argc, char *argv[])
@@ -52,6 +60,11 @@ int main(int argc, char *argv[])
         if ((std::string)argv[1] == "insert")
         {
             bonsai::run_insert(argc, argv);
+        }
+
+        if ((std::string)argv[1] == "show")
+        {
+            bonsai::run_show(argc, argv);
         }
     }
     catch (const std::exception &e)
